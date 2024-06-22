@@ -1,35 +1,26 @@
 import './App.css'
-import Player from './players/Player'
-import Course from './courses/Course.tsx'
-import { steph, becca, rob, arefeen } from './players/index.ts'
-import { Button, Table, TableBody, TableHead, TableRow, ThemeProvider, Typography } from '@mui/material'
-import { westernSkies } from './courses/western-skies.ts'
-import { StyledHeaderCell, StyledTableRow } from './styled-components/StyledTable.tsx'
+import { ThemeProvider } from '@mui/material'
 import { theme } from './theme/original.ts'
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
+import AllHoles from './holes/AllHoles.tsx'
+import Home from './Home.tsx'
+import Hole from './holes/Hole.tsx'
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/'>
+      <Route index element={<Home />} />
+      <Route path='holes' element={<AllHoles />} />
+      <Route path='holes/:number' element={<Hole />} />
+    </Route>
+  )
+)
 
 function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Course {...westernSkies} />
-      <Typography variant='h2'>Player Info</Typography>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <StyledHeaderCell>Name</StyledHeaderCell>
-            <StyledHeaderCell>Tees</StyledHeaderCell>
-            <StyledHeaderCell>Course Handicap</StyledHeaderCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <StyledTableRow><Player {...rob} /></StyledTableRow>
-          <StyledTableRow><Player {...steph} /></StyledTableRow>
-          <StyledTableRow><Player {...arefeen} /></StyledTableRow>
-          <StyledTableRow><Player {...becca} /></StyledTableRow>
-        </TableBody>
-      </Table>
-      <br />
-      <Button variant='contained'>Begin</Button>
+      <RouterProvider router={router} />
     </ThemeProvider>
   )
 }

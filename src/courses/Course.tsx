@@ -7,7 +7,7 @@ export type CourseType = {
   courseHandicaps: CourseHandicap[]
 }
 
-type CourseHandicap = {
+export type CourseHandicap = {
   tees: string[]
   handicap: number[]
   par: number[]
@@ -19,34 +19,34 @@ export default function Course(course: CourseType) {
     <>
       <Typography variant='h2'>Course Info</Typography>
       <Typography variant='h4'>{course.name}</Typography>
-      {course.courseHandicaps.map((courseHandicap) => (
-        <>
+      {course.courseHandicaps.map((courseHandicap, i) => (
+        <div key={i}>
           <Typography variant='h6'>Tees: {courseHandicap.tees.join(', ')}</Typography>
           <Table>
             <TableHead>
               <TableRow>
                 <StyledHeaderCell>Hole</StyledHeaderCell>
-                {holeNumbers.map((h) => (
-                  <StyledHeaderCell>{h}</StyledHeaderCell>
+                {holeNumbers.map((h, hi) => (
+                  <StyledHeaderCell key={hi}>{h}</StyledHeaderCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
               <StyledTableRow>
                 <TableCell sx={{ fontWeight: 'bold', }}>Handicap</TableCell>
-                {courseHandicap.handicap.map((h) => (
-                  <TableCell>{h}</TableCell>
+                {courseHandicap.handicap.map((h, hi) => (
+                  <TableCell key={hi}>{h}</TableCell>
                 ))}
               </StyledTableRow>
               <StyledTableRow>
                 <TableCell sx={{ fontWeight: 'bold', }}>Par</TableCell>
-                {courseHandicap.par.map((p) => (
-                  <TableCell>{p}</TableCell>
+                {courseHandicap.par.map((p, pi) => (
+                  <TableCell key={pi}>{p}</TableCell>
                 ))}
               </StyledTableRow>
             </TableBody>
           </Table>
-        </>
+        </div>
       ))}
     </>
   )
