@@ -13,8 +13,8 @@ Currently the app has hardcoded values for 4 players and 1 course. This is what 
 
 After clicking the "Begin" button, a list of holes will appear:
 
-![holes-list](./screenshots/holes-list.png)
+![show-holes](./screenshots/show-holes.png)
 
-Clicking on a hole will show specific info for that hole. Later it allow user input for the score and will calculate net score.
+Clicking on a hole will show specific info for that hole. It takes in user input & automatically calculates the net score for each player.
 
-![hole-1](./screenshots/hole-1.png)
+![edit-hole](./screenshots/edit-hole.png)

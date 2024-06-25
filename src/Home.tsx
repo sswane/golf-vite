@@ -1,11 +1,19 @@
-import Player from './players/Player'
-import Course from './courses/Course.tsx'
 import { players } from './players/index.ts'
 import { Button, Table, TableBody, TableHead, TableRow, Typography } from '@mui/material'
 import { westernSkies } from './courses/western-skies.ts'
 import { StyledHeaderCell, StyledTableRow } from './styled-components/StyledTable.tsx'
+import { useState } from 'react'
+import Course from './courses/Course.tsx'
+import Player from './players/Player'
+import AllHoles from './holes/AllHoles.tsx'
 
 export default function Home() {
+  const [showHoles, setShowHoles] = useState(false)
+
+  const onBegin = () => {
+    setShowHoles(true)
+  }
+
   return (
     <>
       <Course {...westernSkies} />
@@ -25,7 +33,8 @@ export default function Home() {
         </TableBody>
       </Table>
       <br />
-      <Button variant='contained' href='/holes'>Begin</Button>
+      <Button variant='contained' onClick={onBegin}>Begin</Button>
+      {showHoles ? <AllHoles /> : <></>}
     </>
   )
 }

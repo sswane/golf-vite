@@ -1,7 +1,7 @@
-import { Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Dispatch, SetStateAction } from 'react'
+import { Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from '@mui/material'
 import { westernSkies } from '../courses/western-skies'
-import { players } from '../players'
-import { useParams } from 'react-router-dom'
+import { PlayerType } from '../players/Player'
 import { StyledHeaderCell, StyledTableRow } from '../styled-components/StyledTable'
 
 const getHoleAllowance = (hole: number, tees: string, playerHandicap: number) => {
@@ -19,12 +19,24 @@ const getHoleAllowance = (hole: number, tees: string, playerHandicap: number) =>
   return allowed + additional
 }
 
-export default function Hole() {
-  let { number } = useParams()
-  const hole = Number(number)
+type HoleType = {
+  hole: number
+  players: PlayerType[]
+  updatePlayers: Dispatch<SetStateAction<PlayerType[]>>
+}
+
+export default function Hole({ hole, players, updatePlayers }: HoleType) {
+
+  const saveScore = (event: React.ChangeEvent<HTMLInputElement>, player: PlayerType, allowance: number) => {
+    const playerScore = Number(event.target.value)
+    player.grossScores[hole - 1] = playerScore
+    player.netScores[hole - 1] = playerScore - allowance
+    updatePlayers(players.map((p) => p.name === player.name ? player : p))
+    console.log(`net score - ${player.netScores[hole - 1]}`)
+  }
 
   return (
-    <>
+    <div style={{ margin: '0px 24px 24px 24px' }}>
       <Typography variant='h3'>Hole: {hole}</Typography>
       {westernSkies.courseHandicaps.map((ch, i) => (
         <Typography key={i} variant='h6'>
@@ -40,16 +52,27 @@ export default function Hole() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {players.map((player, i) => (
-            <StyledTableRow key={i}>
-              <TableCell>{player.name}</TableCell>
-              <TableCell>{getHoleAllowance(hole, player.tees, player.courseHandicap)}</TableCell>
-              <TableCell>insert score</TableCell>
-              <TableCell>calculate score</TableCell>
-            </StyledTableRow>
-          ))}
+          {players.map((player, i) => {
+            const allowance = getHoleAllowance(hole, player.tees, player.courseHandicap)
+            return (
+              <StyledTableRow key={i}>
+                <TableCell>{player.name}</TableCell>
+                <TableCell>{allowance}</TableCell>
+                <TableCell>
+                  <TextField
+                    id={`player${i}Score`}
+                    label='Player Score'
+                    variant='outlined'
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => saveScore(event, player, allowance)}
+                    defaultValue={player.grossScores[hole - 1]}
+                  />
+                </TableCell>
+                <TableCell>{player.netScores[hole - 1]}</TableCell>
+              </StyledTableRow>
+            )
+          })}
         </TableBody>
       </Table>
-    </>
+    </div>
   )
 }

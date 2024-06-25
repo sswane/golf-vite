@@ -6,7 +6,7 @@ import { westernSkies } from '../courses/western-skies'
 import { PlayerType } from './Player'
 
 const steph: PlayerType = {
-  name: 'Stephanie Swaney',
+  name: 'Stephanie',
   course: 'Western Skies',
   tees: westernSkies.tees[3],
   courseHandicap: 3,
@@ -15,7 +15,7 @@ const steph: PlayerType = {
 }
 
 const becca: PlayerType = {
-  name: 'Becca Miller',
+  name: 'Becca',
   course: 'Western Skies',
   tees: westernSkies.tees[3],
   courseHandicap: 21,
@@ -24,7 +24,7 @@ const becca: PlayerType = {
 }
 
 const rob: PlayerType = {
-  name: 'Rob Miller',
+  name: 'Rob',
   course: 'Western Skies',
   tees: westernSkies.tees[0],
   courseHandicap: 0,
@@ -33,7 +33,7 @@ const rob: PlayerType = {
 }
 
 const arefeen: PlayerType = {
-  name: 'Arefeen Ahmed',
+  name: 'Arefeen',
   course: 'Western Skies',
   tees: westernSkies.tees[0],
   courseHandicap: 12,
@@ -41,4 +41,4 @@ const arefeen: PlayerType = {
   netScores: [],
 }
 
-export const players = [ arefeen, becca, rob, steph ]
+export const players = [ rob, steph, arefeen, becca ]
