@@ -9,10 +9,6 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.light,
     borderBottom: '2px solid black',
   },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
 }))
 
 export const StyledHeaderCell = styled(TableCell)(() => ({
@@ -20,4 +16,8 @@ export const StyledHeaderCell = styled(TableCell)(() => ({
   color: 'black',
   fontWeight: 'bold',
   borderBottom: '3px solid black',
+}))
+
+export const BoldCell = styled(TableCell)(() => ({
+  fontWeight: 'bold',
 }))

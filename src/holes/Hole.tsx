@@ -32,11 +32,10 @@ export default function Hole({ hole, players, updatePlayers }: HoleType) {
     player.grossScores[hole - 1] = playerScore
     player.netScores[hole - 1] = playerScore - allowance
     updatePlayers(players.map((p) => p.name === player.name ? player : p))
-    console.log(`net score - ${player.netScores[hole - 1]}`)
   }
 
   return (
-    <div style={{ margin: '0px 24px 24px 24px' }}>
+    <div style={{ textAlign: 'center' }}>
       <Typography variant='h3'>Hole: {hole}</Typography>
       {westernSkies.courseHandicaps.map((ch, i) => (
         <Typography key={i} variant='h6'>
@@ -65,6 +64,7 @@ export default function Hole({ hole, players, updatePlayers }: HoleType) {
                     variant='outlined'
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => saveScore(event, player, allowance)}
                     defaultValue={player.grossScores[hole - 1]}
+                    sx={{ width: '120px' }}
                   />
                 </TableCell>
                 <TableCell>{player.netScores[hole - 1]}</TableCell>
