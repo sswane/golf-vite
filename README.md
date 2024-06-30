@@ -6,6 +6,21 @@ Created via `npm create vite@latest golf-vite -- --template react-ts`
 
 Project still includes some css files from the starter - should be revisited later.
 
+## Getting Started
+
+Ensure you have the latest version of npm and node installed. Then, install dependencies:
+
+`npm install`  
+
+And run the app locally:
+
+`npm run dev`
+
+Alternatively, you can run directly using vite by doing:
+
+`npm install -g vite`  
+`vite`
+
 ## Current App
 Currently the app has hardcoded values for 4 players and 1 course. This is what the site currently looks like when running:
 
