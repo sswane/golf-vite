@@ -1,15 +1,22 @@
-import { Button, Dialog, DialogActions, DialogTitle, Typography } from '@mui/material'
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
-import { westernSkies } from '../courses/western-skies'
-import Hole from './Hole'
+import { Dispatch, SetStateAction } from 'react'
 import { useState } from 'react'
-import { players } from '../players'
+import { Button, Dialog, DialogActions, DialogTitle, Typography } from '@mui/material'
+import { westernSkies } from '../courses/western-skies'
+import { PlayerType } from '../players/Player'
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import Hole from './Hole'
 import Scorecard from '../scorecard/Scorecard'
+import { TeamType } from '../teams/ChooseTeams'
 
-export default function AllHoles() {
-  const [playerState, updatePlayers] = useState(players)
+export type AllHolesType = {
+  players: PlayerType[]
+  updatePlayers: Dispatch<SetStateAction<PlayerType[]>>
+}
+
+export default function AllHoles({ players, updatePlayers }: AllHolesType) {
+  const startingTeams: TeamType[] = [{ num: 1, netScores: [] }, { num: 2, netScores: [] }]
   const [numToOpen, setNumToOpen] = useState(0)
-  const [openScorecard, setOpenScorecard] = useState(false)
+  const [teams, setTeams] = useState(startingTeams)
 
   const holes = Array.from({ length: 18 }, (_, i) => i + 1)
   const courseName = westernSkies.name
@@ -20,10 +27,6 @@ export default function AllHoles() {
 
   const closeHoleDialog = () => {
     setNumToOpen(0)
-  }
-
-  const showScorecard = () => {
-    setOpenScorecard(true)
   }
 
   return (
@@ -37,7 +40,7 @@ export default function AllHoles() {
             </Button>
             <Dialog onClose={closeHoleDialog} open={numToOpen === h}>
               <DialogTitle>Scores</DialogTitle>
-              <Hole hole={h} players={playerState} updatePlayers={updatePlayers} />
+              <Hole hole={h} players={players} updatePlayers={updatePlayers} teams={teams} setTeams={setTeams} />
               <DialogActions>
                 <Button variant='contained' sx={{ width: '75px', textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={closeHoleDialog}>Close</Button>
               </DialogActions>
@@ -45,8 +48,7 @@ export default function AllHoles() {
           </Grid2>
         ))}
       </Grid2>
-      <Button variant='contained' sx={{ height: '75px', width: '150px', textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={showScorecard}>Scorecard</Button>
-      {openScorecard ? <Scorecard courseName={courseName} players={playerState} openScorecard={openScorecard} holes={holes} setOpenScorecard={setOpenScorecard} /> : <></>}
+      <Scorecard courseName={courseName} holes={holes} players={players} teams={teams} />
     </>
   )
 }

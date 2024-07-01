@@ -1,45 +1,37 @@
-import { Dispatch, SetStateAction } from 'react'
-import { Button, Dialog, DialogActions, DialogTitle, Table, TableBody, TableHead, TableRow } from '@mui/material'
-import { StyledHeaderCell } from '../styled-components/StyledTable'
+import { useState } from 'react'
 import { PlayerType } from '../players/Player'
-import Score from './Score'
+import { TeamType } from '../teams/ChooseTeams'
+import { Button } from '@mui/material'
+import PlayerNetScorecard from './PlayerNetScorecard'
+import TeamScorecard from './TeamScorecard'
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 
 type ScorecardType = {
   courseName: string
   players: PlayerType[]
-  openScorecard: boolean
   holes: number[]
-  setOpenScorecard: Dispatch<SetStateAction<boolean>>
+  teams: TeamType[]
 }
 
-export default function Scorecard({ courseName, players, openScorecard, holes, setOpenScorecard }: ScorecardType) {
+export default function Scorecard({ courseName, holes, players, teams }: ScorecardType) {
+  const [openPlayerNet, setOpenPlayerNet] = useState(false)
+  const [openTeam, setOpenTeam] = useState(false)
+  const buttonStyles = { height: '75px', width: '175px', textAlign: 'center', display: 'flex', margin: '0 auto' }
 
-  const closeScorecard = () => {
-    setOpenScorecard(false)
+  const handlePlayerNet = () => {
+    setOpenPlayerNet(true)
+  }
+
+  const handleTeam = () => {
+    setOpenTeam(true)
   }
 
   return (
-    <Dialog open={openScorecard} onClose={closeScorecard}>
-      <DialogTitle>Scorecard - {courseName}</DialogTitle>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <StyledHeaderCell></StyledHeaderCell>
-            {holes.map((h) => (
-              <StyledHeaderCell key={h}>{h}</StyledHeaderCell>
-            ))}
-            <StyledHeaderCell>Total</StyledHeaderCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {players.map((player) => (
-            <Score holes={holes} name={player.name} scores={player.netScores} />
-          ))}
-        </TableBody>
-      </Table>
-      <DialogActions>
-        <Button variant='contained' sx={{ width: '75px', textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={closeScorecard}>Close</Button>
-      </DialogActions>
-    </Dialog>
+    <Grid2 container>
+      <Button variant='contained' sx={buttonStyles} onClick={handlePlayerNet}>Player Net Scorecard</Button>
+      <Button variant='contained' sx={buttonStyles} onClick={handleTeam}>Team Net Scorecard</Button>
+      {openPlayerNet ? <PlayerNetScorecard courseName={courseName} players={players} openScorecard={openPlayerNet} holes={holes} setOpenScorecard={setOpenPlayerNet} /> : <></>}
+      {openTeam ? <TeamScorecard courseName={courseName} teams={teams} openScorecard={openTeam} holes={holes} setOpenScorecard={setOpenTeam} /> : <></>}
+    </Grid2>
   )
 }

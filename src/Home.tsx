@@ -6,11 +6,15 @@ import { useState } from 'react'
 import Course from './courses/Course.tsx'
 import Player from './players/Player'
 import AllHoles from './holes/AllHoles.tsx'
+import ChooseTeams from './teams/ChooseTeams.tsx'
 
 export default function Home() {
+  const [playerState, updatePlayers] = useState(players)
   const [showHoles, setShowHoles] = useState(false)
+  const [showChooseTeams, setShowChooseTeams] = useState(false)
 
   const onBegin = () => {
+    setShowChooseTeams(true)
     setShowHoles(true)
   }
 
@@ -33,8 +37,9 @@ export default function Home() {
         </TableBody>
       </Table>
       <br />
-      <Button variant='contained' onClick={onBegin}>Begin</Button>
-      {showHoles ? <AllHoles /> : <></>}
+      <Button variant='contained' onClick={onBegin}>Choose Teams</Button>
+      {showChooseTeams ? <ChooseTeams players={playerState} updatePlayers={updatePlayers} showChooseTeams={showChooseTeams} setShowChooseTeams={setShowChooseTeams} /> : <></> }
+      {showHoles ? <AllHoles players={playerState} updatePlayers={updatePlayers} /> : <></>}
     </>
   )
 }

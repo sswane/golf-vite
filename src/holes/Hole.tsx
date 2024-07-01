@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography
 import { westernSkies } from '../courses/western-skies'
 import { PlayerType } from '../players/Player'
 import { StyledHeaderCell, StyledTableRow } from '../styled-components/StyledTable'
+import { TeamType } from '../teams/ChooseTeams'
 
 const getHoleAllowance = (hole: number, tees: string, playerHandicap: number) => {
   const courseHandicap = westernSkies.courseHandicaps.find((ch) => {
@@ -23,15 +24,28 @@ type HoleType = {
   hole: number
   players: PlayerType[]
   updatePlayers: Dispatch<SetStateAction<PlayerType[]>>
+  teams: TeamType[]
+  setTeams: Dispatch<SetStateAction<TeamType[]>>
 }
 
-export default function Hole({ hole, players, updatePlayers }: HoleType) {
+export default function Hole({ hole, players, updatePlayers, teams, setTeams }: HoleType) {
 
   const saveScore = (event: React.ChangeEvent<HTMLInputElement>, player: PlayerType, allowance: number) => {
     const playerScore = Number(event.target.value)
+    const netScore = playerScore - allowance
     player.grossScores[hole - 1] = playerScore
-    player.netScores[hole - 1] = playerScore - allowance
+    player.netScores[hole - 1] = netScore
     updatePlayers(players.map((p) => p.name === player.name ? player : p))
+    const teamScores = teams.map((team) => {
+      if (Number(player.team) === team.num) {
+        if (netScore > team.netScores[hole - 1]) {
+          return team
+        }
+        team.netScores[hole - 1] = netScore
+      }
+      return team
+    })
+    setTeams(teamScores)
   }
 
   return (
@@ -45,6 +59,7 @@ export default function Hole({ hole, players, updatePlayers }: HoleType) {
         <TableHead>
           <TableRow>
             <StyledHeaderCell>Player</StyledHeaderCell>
+            <StyledHeaderCell>Team</StyledHeaderCell>
             <StyledHeaderCell>Handicap Allowance</StyledHeaderCell>
             <StyledHeaderCell>Score</StyledHeaderCell>
             <StyledHeaderCell>Net Score</StyledHeaderCell>
@@ -56,6 +71,7 @@ export default function Hole({ hole, players, updatePlayers }: HoleType) {
             return (
               <StyledTableRow key={i}>
                 <TableCell>{player.name}</TableCell>
+                <TableCell>{`Team ${player.team}`}</TableCell>
                 <TableCell>{allowance}</TableCell>
                 <TableCell>
                   <TextField
