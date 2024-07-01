@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "yellow-chair"
+  },
+  "targets": {
+    "yellow-chair": {
+      "hosting": {
+        "golf": [
+          "golf-yc"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

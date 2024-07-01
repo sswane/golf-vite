@@ -3,18 +3,19 @@ import { BoldCell } from '../styled-components/StyledTable'
 
 type ScoreType = {
   holes: number[]
+  name: string
   scores: number[]
   team?: number
 }
 
-export default function Score({ holes, scores, team }: ScoreType) {
+export default function Score({ holes, name, scores, team }: ScoreType) {
   const theme = useTheme()
   return (
     <TableRow sx={{
       backgroundColor: team === 1 ? theme.palette.primary.main : theme.palette.secondary.light,
       borderBottom: '2px solid black',
     }}>
-      <BoldCell>Team {team}</BoldCell>
+      <BoldCell>{name}</BoldCell>
       {holes.map((h) => (
         <TableCell key={h}>{scores[h - 1]}</TableCell>
       ))}

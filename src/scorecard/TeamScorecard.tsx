@@ -32,7 +32,7 @@ export default function TeamScorecard({ courseName, teams, openScorecard, holes,
         </TableHead>
         <TableBody>
           {teams.map((team, i) => (
-            <Score key={i} holes={holes} scores={team.netScores} team={team.num} />
+            <Score key={i} holes={holes} name={`Team ${team}`} scores={team.netScores} team={team.num} />
           ))}
         </TableBody>
       </Table>

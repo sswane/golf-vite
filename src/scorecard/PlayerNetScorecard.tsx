@@ -33,7 +33,7 @@ export default function PlayerNetScorecard({ courseName, players, openScorecard,
         </TableHead>
         <TableBody>
           {players.map((player, i) => (
-            <Score key={i} holes={holes} scores={player.netScores} team={player.team} />
+            <Score key={i} holes={holes} name={player.name} scores={player.netScores} team={player.team} />
           ))}
         </TableBody>
       </Table>
