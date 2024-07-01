@@ -16,7 +16,7 @@ type ScorecardType = {
 export default function Scorecard({ courseName, holes, players, teams }: ScorecardType) {
   const [openPlayerNet, setOpenPlayerNet] = useState(false)
   const [openTeam, setOpenTeam] = useState(false)
-  const buttonStyles = { height: '75px', width: '175px', textAlign: 'center', display: 'flex', margin: '0 auto' }
+  const buttonStyles = { height: 72, width: 175, textAlign: 'center', display: 'flex', margin: '0 auto' }
 
   const handlePlayerNet = () => {
     setOpenPlayerNet(true)

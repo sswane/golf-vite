@@ -33,12 +33,12 @@ export default function PlayerNetScorecard({ courseName, players, openScorecard,
         </TableHead>
         <TableBody>
           {players.map((player, i) => (
-            <Score key={i} holes={holes} name={player.name} scores={player.netScores} />
+            <Score key={i} holes={holes} scores={player.netScores} team={player.team} />
           ))}
         </TableBody>
       </Table>
       <DialogActions>
-        <Button variant='contained' sx={{ width: '75px', textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={closeScorecard}>Close</Button>
+        <Button variant='contained' sx={{ width: 72, textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={closeScorecard}>Close</Button>
       </DialogActions>
     </Dialog>
   )

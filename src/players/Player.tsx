@@ -7,7 +7,7 @@ export type PlayerType = {
   courseHandicap: number
   grossScores: number[]
   netScores: number[]
-  team?: string
+  team?: number
 }
 
 export default function Player (player: PlayerType) {

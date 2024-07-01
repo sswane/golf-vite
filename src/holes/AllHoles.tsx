@@ -32,17 +32,17 @@ export default function AllHoles({ players, updatePlayers }: AllHolesType) {
   return (
     <>
       <Typography variant='h3' margin='20px 0px'>{courseName}</Typography>
-      <Grid2 container spacing={2} sx={{ marginBottom: '24px' }}>
+      <Grid2 container spacing={2} sx={{ marginBottom: 4 }}>
         {holes.map((h) => (
           <Grid2 key={h} xs={8} sm={4}>
-            <Button variant='contained' sx={{ height: '75px', width: '75px' }} onClick={() => openHoleDialog(h)}>
+            <Button variant='contained' sx={{ height: 72, width: 72 }} onClick={() => openHoleDialog(h)}>
               <Typography variant='h5'>{h}</Typography>
             </Button>
             <Dialog onClose={closeHoleDialog} open={numToOpen === h}>
               <DialogTitle>Scores</DialogTitle>
               <Hole hole={h} players={players} updatePlayers={updatePlayers} teams={teams} setTeams={setTeams} />
               <DialogActions>
-                <Button variant='contained' sx={{ width: '75px', textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={closeHoleDialog}>Close</Button>
+                <Button variant='contained' sx={{ width: 72, textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={closeHoleDialog}>Close</Button>
               </DialogActions>
             </Dialog>
           </Grid2>

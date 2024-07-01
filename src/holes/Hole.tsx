@@ -80,7 +80,7 @@ export default function Hole({ hole, players, updatePlayers, teams, setTeams }: 
                     variant='outlined'
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => saveScore(event, player, allowance)}
                     defaultValue={player.grossScores[hole - 1]}
-                    sx={{ width: '120px' }}
+                    sx={{ width: 120 }}
                   />
                 </TableCell>
                 <TableCell>{player.netScores[hole - 1]}</TableCell>

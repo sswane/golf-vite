@@ -23,7 +23,7 @@ export default function TeamScorecard({ courseName, teams, openScorecard, holes,
       <Table>
         <TableHead>
           <TableRow>
-            <StyledHeaderCell></StyledHeaderCell>
+            <StyledHeaderCell sx={{ minWidth: 64 }}></StyledHeaderCell>
             {holes.map((h) => (
               <StyledHeaderCell key={h}>{h}</StyledHeaderCell>
             ))}
@@ -32,12 +32,12 @@ export default function TeamScorecard({ courseName, teams, openScorecard, holes,
         </TableHead>
         <TableBody>
           {teams.map((team, i) => (
-            <Score key={i} holes={holes} name={`Team ${team.num}`} scores={team.netScores} />
+            <Score key={i} holes={holes} scores={team.netScores} team={team.num} />
           ))}
         </TableBody>
       </Table>
       <DialogActions>
-        <Button variant='contained' sx={{ width: '75px', textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={closeScorecard}>Close</Button>
+        <Button variant='contained' sx={{ width: 72, textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={closeScorecard}>Close</Button>
       </DialogActions>
     </Dialog>
   )
