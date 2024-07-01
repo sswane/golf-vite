@@ -22,7 +22,7 @@ Alternatively, you can run directly using vite by doing:
 `vite`
 
 ## Deployment
-https://golf-yc.web.app - Deployed via Firebase
+https://golf-yc.web.app - deployed via Firebase using GitHub Actions.
 
 ## Current App
 Currently the app has hardcoded values for 4 players and 1 course. This is what the site currently looks like when running:
