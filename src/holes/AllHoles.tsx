@@ -3,10 +3,10 @@ import { useState } from 'react'
 import { Button, Dialog, DialogActions, DialogTitle, Typography } from '@mui/material'
 import { westernSkies } from '../courses/western-skies'
 import { PlayerType } from '../players/Player'
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import { TeamType } from '../teams/ChooseTeams'
+import Grid from '@mui/material/Unstable_Grid2'
 import Hole from './Hole'
 import Scorecard from '../scorecard/Scorecard'
-import { TeamType } from '../teams/ChooseTeams'
 
 export type AllHolesType = {
   players: PlayerType[]
@@ -32,9 +32,9 @@ export default function AllHoles({ players, updatePlayers }: AllHolesType) {
   return (
     <>
       <Typography variant='h3' margin='20px 0px'>{courseName}</Typography>
-      <Grid2 container spacing={2} sx={{ marginBottom: 4 }}>
+      <Grid columns={18} container spacing={2} sx={{ marginBottom: 4 }}>
         {holes.map((h) => (
-          <Grid2 key={h} xs={8} sm={4}>
+          <Grid key={h} xs={18} sm={9} md={6} lg={2} xl={1}>
             <Button variant='contained' sx={{ height: 72, width: 72 }} onClick={() => openHoleDialog(h)}>
               <Typography variant='h5'>{h}</Typography>
             </Button>
@@ -45,9 +45,9 @@ export default function AllHoles({ players, updatePlayers }: AllHolesType) {
                 <Button variant='contained' sx={{ width: 72, textAlign: 'center', display: 'flex', margin: '0 auto' }} onClick={closeHoleDialog}>Close</Button>
               </DialogActions>
             </Dialog>
-          </Grid2>
+          </Grid>
         ))}
-      </Grid2>
+      </Grid>
       <Scorecard courseName={courseName} holes={holes} players={players} teams={teams} />
     </>
   )

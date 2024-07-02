@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import { StyledHeaderCell, StyledTableRow } from '../styled-components/StyledTable'
 import { westernSkies } from '../courses/western-skies'
 import { PlayerType } from '../players/Player'
-import { StyledHeaderCell, StyledTableRow } from '../styled-components/StyledTable'
 import { TeamType } from '../teams/ChooseTeams'
 
 const getHoleAllowance = (hole: number, tees: string, playerHandicap: number) => {
@@ -78,6 +78,7 @@ export default function Hole({ hole, players, updatePlayers, teams, setTeams }: 
                     id={`player${i}Score`}
                     label='Player Score'
                     variant='outlined'
+                    inputProps={{ inputMode: 'numeric' }}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => saveScore(event, player, allowance)}
                     defaultValue={player.grossScores[hole - 1]}
                     sx={{ width: 120 }}
