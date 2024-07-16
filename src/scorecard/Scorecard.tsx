@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PlayerType } from '../players/Player'
+import { PlayerType } from '../players'
 import { TeamType } from '../teams/ChooseTeams'
 import { Button } from '@mui/material'
 import PlayerNetScorecard from './PlayerNetScorecard'

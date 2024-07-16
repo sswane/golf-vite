@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { PlayerType } from '../players/Player'
+import { PlayerType } from '../players'
 import { Box, Button, Dialog, DialogActions, DialogTitle, useTheme } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import InputLabel from '@mui/material/InputLabel'

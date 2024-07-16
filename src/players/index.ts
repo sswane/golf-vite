@@ -3,7 +3,16 @@
 */
 
 import { westernSkies } from '../courses/western-skies'
-import { PlayerType } from './Player'
+
+export type PlayerType = {
+  name: string
+  course: string
+  tees: string
+  courseHandicap: number
+  grossScores: number[]
+  netScores: number[]
+  team?: number
+}
 
 const steph: PlayerType = {
   name: 'Stephanie',

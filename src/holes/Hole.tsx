@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from '@mui/material'
 import { StyledHeaderCell, StyledTableRow } from '../styled-components/StyledTable'
 import { westernSkies } from '../courses/western-skies'
-import { PlayerType } from '../players/Player'
+import { PlayerType } from '../players'
 import { TeamType } from '../teams/ChooseTeams'
 
 const getHoleAllowance = (hole: number, tees: string, playerHandicap: number) => {
@@ -38,10 +38,9 @@ export default function Hole({ hole, players, updatePlayers, teams, setTeams }: 
     updatePlayers(players.map((p) => p.name === player.name ? player : p))
     const teamScores = teams.map((team) => {
       if (Number(player.team) === team.num) {
-        if (netScore > team.netScores[hole - 1]) {
-          return team
+        if (!team.netScores[hole - 1] || netScore < team.netScores[hole - 1]) {
+          team.netScores[hole - 1] = netScore
         }
-        team.netScores[hole - 1] = netScore
       }
       return team
     })

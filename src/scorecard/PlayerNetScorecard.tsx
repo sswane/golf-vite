@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { Button, Dialog, DialogActions, DialogTitle, Table, TableBody, TableHead, TableRow } from '@mui/material'
 import { StyledHeaderCell } from '../styled-components/StyledTable'
-import { PlayerType } from '../players/Player'
+import { PlayerType } from '../players'
 import Score from './Score'
 
 type PlayerScorecardType = {
